@@ -1,17 +1,16 @@
 <template>
-  <div id="root">
+  <div id="app">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader :addTodo="addTodo"/>
+        <MyHeader @addTodo="addTodo"/>
         <MyList :todos="todos" :checkTodo="checkTodo" :delTodo="delTodo"/>
-        <MyFooter :todos="todos" :allCheck="allCheck" :delAllCheck="delAllCheck"/>
+        <MyFooter :todos="todos" @allCheck="allCheck" @delAllCheck="delAllCheck"/>
     	</div>
     </div>
   </div>
 </template>
 
 <script>
-import { watch } from 'vue';
 import MyFooter from './components/MyFooter.vue';
 import MyHeader from './components/MyHeader.vue';
 import MyList from './components/MyList.vue';

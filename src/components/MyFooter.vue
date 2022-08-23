@@ -14,7 +14,7 @@
 <script>
 export default {
     name:'MyFooter',
-    props:['todos', 'allCheck','delAllCheck'],
+    props:['todos'],
     computed:{
       complete(){
         return this.todos.reduce((pre,current)=> pre+(current.done?1:0),0);
@@ -25,7 +25,7 @@ export default {
           return this.complete===this.todos.length && this.todos.length>0;
         },
         set(value){
-          this.allCheck(value);
+           this.$emit('allCheck',value)
         }
       }
       
@@ -37,7 +37,7 @@ export default {
     },
     methods:{
       delAll(){
-        if(confirm("确定全部清空吗?")) {this.delAllCheck()};
+        if(confirm("确定全部清空吗?")) {this.$emit('delAllCheck')};
       }
     }
 
