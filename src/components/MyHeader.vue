@@ -17,7 +17,6 @@ export default {
         add(){
             if(!this.title.trim()) return alert("输入不能为空")
             const todoObj = {id:nanoid(),title:this.title,done:false}
-            //console.log(todoObj)
             this.addTodo(todoObj)
             this.title=''
         }

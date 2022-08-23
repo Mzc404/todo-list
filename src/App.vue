@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { watch } from 'vue';
 import MyFooter from './components/MyFooter.vue';
 import MyHeader from './components/MyHeader.vue';
 import MyList from './components/MyList.vue';
@@ -23,11 +24,7 @@ export default {
   },
   data(){
     return{
-      todos:[
-        {id:'001',title:'吃饭',done:true},
-        {id:'002',title:'睡觉',done:false},
-        {id:'003',title:'打豆豆',done:false},
-      ]
+      todos:JSON.parse(localStorage.getItem('todos'))||[]
     }
       
   },
@@ -56,6 +53,14 @@ export default {
       this.todos=this.todos.filter((todo)=>{
         return !todo.done
       })
+    }
+  },
+  watch:{
+    todos :{
+      deep:true,
+      handler(value){
+        localStorage.setItem('todos',JSON.stringify(value))
+      }
     }
   }
 }
