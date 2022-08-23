@@ -1,8 +1,8 @@
 <template>
   <li>
     <label>
-      <input type="checkbox"/>  
-      <span>xccccccc</span>
+      <input type="checkbox" :checked="todoObj.done" @click="handleCheck(todoObj.id)"/>  
+      <span>{{todoObj.title}}</span>
     </label>
     <button class="btn btn-danger" >删除</button>
   </li>
@@ -10,6 +10,13 @@
 <script>
 export default {
     name:'MyItem',
+    props:['todoObj','checkTodo'],
+    methods:{
+      handleCheck(todoId){
+        console.log(todoId)
+        this.checkTodo(todoId)
+      }
+    }
 
 }
 </script>

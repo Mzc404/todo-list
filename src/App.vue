@@ -2,8 +2,8 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader />
-        <MyList/>
+        <MyHeader :addTodo="addTodo"/>
+        <MyList :todos="todos" :checkTodo="checkTodo"/>
         <MyFooter />
     	</div>
     </div>
@@ -20,7 +20,29 @@ export default {
     MyHeader,
     MyFooter,
     MyList
-}
+  },
+  data(){
+    return{
+      todos:[
+        {id:'001',title:'吃饭',done:true},
+        {id:'002',title:'睡觉',done:false},
+        {id:'003',title:'打豆豆',done:false},
+      ]
+    }
+      
+  },
+  methods:{
+    addTodo(todoObj){
+      this.todos.unshift(todoObj)
+    },
+    checkTodo(todoId){
+      this.todos.forEach(todo => {
+        if(todo.id===todoId){
+          todo.done=!todo.done
+        }
+      });
+    },
+  }
 }
 </script>
 
