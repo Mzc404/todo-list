@@ -10,16 +10,16 @@
 <script>
 export default {
     name:'MyItem',
-    props:['todoObj','checkTodo','delTodo'],
+    props:['todoObj'],
     
     methods:{
       handleCheck(todoId){
         console.log(todoId)
-        this.checkTodo(todoId)
+        this.$bus.$emit('checkTodo',todoId)
       },
       del(todoId){
         if(confirm("确认删除?")){
-          this.delTodo(todoId)
+          this.$bus.$emit('delTodo',todoId)
         }
        
       },

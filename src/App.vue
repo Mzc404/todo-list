@@ -61,6 +61,14 @@ export default {
         localStorage.setItem('todos',JSON.stringify(value))
       }
     }
+  },
+  mounted(){
+    this.$bus.$on('checkTodo',this.checkTodo)
+    this.$bus.$on('delTodo',this.delTodo)
+  },
+  beforeDestroy(){
+    this.$bus.$off('checkTodo')
+    this.$bus.$off('delTodo')
   }
 }
 </script>
