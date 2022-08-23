@@ -1,19 +1,45 @@
 <template>
-  <div class="todo-footer" >
+  <div class="todo-footer" v-show="todos.length">
     <label>
       <!-- <input type="checkbox" :checked="isAll" @change="checkAll"/> -->
-      <input type="checkbox"/>
+      <input type="checkbox" v-model="testCheck"/>
     </label>
     <span>
-      <span>已完成0</span> / 全部0
+      <span>已完成{{complete}}</span> / 全部{{todos.length}}
     </span>
-    <button class="btn btn-danger">清除已完成任务</button>
+    <button class="btn btn-danger" @click="delAll">清除已完成任务</button>
   </div>
 </template>
 
 <script>
 export default {
-    name:'MyFooter'
+    name:'MyFooter',
+    props:['todos', 'allCheck','delAllCheck'],
+    computed:{
+      complete(){
+        return this.todos.reduce((pre,current)=> pre+(current.done?1:0),0);
+      },
+      testCheck:{
+        get(){
+         
+          return this.complete===this.todos.length && this.todos.length>0;
+        },
+        set(value){
+          this.allCheck(value);
+        }
+      }
+      
+    },
+    data(){
+      return {
+        isCheck:false
+      }
+    },
+    methods:{
+      delAll(){
+        if(confirm("确定全部清空吗?")) {this.delAllCheck()};
+      }
+    }
 
 }
 </script>
