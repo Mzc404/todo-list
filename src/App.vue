@@ -52,7 +52,14 @@ export default {
       this.todos=this.todos.filter((todo)=>{
         return !todo.done
       })
-    }
+    },
+    updateTodo(todoId,title){
+      this.todos.forEach(todo => {
+        if(todo.id===todoId){
+          todo.title=title
+        }
+      });
+    },
   },
   watch:{
     todos :{
@@ -65,10 +72,12 @@ export default {
   mounted(){
     this.$bus.$on('checkTodo',this.checkTodo)
     this.$bus.$on('delTodo',this.delTodo)
+    this.$bus.$on('updateTodo',this.updateTodo)
   },
   beforeDestroy(){
     this.$bus.$off('checkTodo')
     this.$bus.$off('delTodo')
+    this.$bus.$off('updateTodo')
   }
 }
 </script>
@@ -83,6 +92,6 @@ export default {
     .btn-danger:hover {color: #fff;background-color: #bd362f;}
     .btn:focus {outline: none;}
     .todo-container {width: 600px;margin: 0 auto;}
-    .todo-container .todo-wrap {padding: 10px;border: 1px solid #ddd;border-radius: 5px;
-  }
+    .todo-container .todo-wrap {padding: 10px;border: 1px solid #ddd;border-radius: 5px;}
+    .btn-edit {color: #fff;background-color: skyblue;border: 1px solid rgb(135, 200, 226);margin-right: 5px;}
 </style>
